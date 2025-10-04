@@ -13,7 +13,7 @@ const SYSTEM_PROMPT = `You are an expert AI-powered image analysis tool with adv
 • Offer insights about context, meaning, and relationships within images
 • Be precise, professional, and informative in your responses
 
-IMPORTANT: Keep your responses concise and focused - maximum 300 words. Prioritize the most relevant information for the user's specific question.
+IMPORTANT: Keep your responses concise and focused - maximum 600 words. Prioritize the most relevant information for the user's specific question.
 
 `;
 
@@ -62,7 +62,7 @@ export async function chatWithImage(
     // Add conversation history if provided (limit to 3 exchanges for demo)
     if (conversationHistory && Array.isArray(conversationHistory) && conversationHistory.length > 0) {
       const recentHistory = conversationHistory
-        .slice(-6) // Keep last 6 messages (3 exchanges)
+        .slice(-10) // Keep last 10 messages (5 exchanges)
         .filter((msg) => msg && typeof msg === 'object' && msg.role && msg.content)
         .map((msg) => `${msg.role === 'user' ? 'User' : 'Assistant'}: ${msg.content}`)
         .join('\n');
@@ -96,7 +96,7 @@ export async function chatWithImage(
         prompt: parts,
         config: {
           temperature: 0.7,
-          maxOutputTokens: 100, // ~150 words limit for demo
+          maxOutputTokens: 400, // ~600 words limit for demo
         },
       });
 
